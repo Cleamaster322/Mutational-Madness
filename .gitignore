@@ -11,6 +11,7 @@ Logs/
 # Visual Studio / Visual Studio Code    #
 # ===================================== #
 ExportedObj/
+*.vsconfig
 .vs/
 *.userprefs
 *.csproj
