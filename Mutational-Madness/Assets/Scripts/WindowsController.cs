@@ -9,7 +9,12 @@ public class WindowManager : MonoBehaviour
     public List<Button> buttons;
 
     void Start()
-    {
+    {   
+        for (int j = 1; j < windows.Count; j++)
+        {           
+            windows[j].SetActive(false);
+        }
+
         for (int i = 0; i < buttons.Count; i++)
         {
             int index = i;
