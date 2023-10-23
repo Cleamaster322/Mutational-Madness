@@ -7,7 +7,12 @@ public class SceneLoader : MonoBehaviour
     public Button button1;
     public Button button2;
     public Button button3;
-    
+    public GameObject info;
+
+    private void Start()
+    {
+        info.SetActive(false);
+    }
 
     void OnEnable()
     {
@@ -23,3 +28,4 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 }
+
