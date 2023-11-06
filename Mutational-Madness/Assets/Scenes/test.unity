@@ -203,7 +203,7 @@ MonoBehaviour:
   offset: -90
   bullet: {fileID: 476083565720757294, guid: 12f8e4bf2d898584987e5162d7b17546, type: 3}
   shotPoint: {fileID: 383300411}
-  hui: {fileID: 0}
+  player: {fileID: 1987771840}
   startTimeBtwShots: 0.3
 --- !u!212 &663863232
 SpriteRenderer:
@@ -1158,6 +1158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3.5
   animator: {fileID: 1987771845}
+  weapon: 0
 --- !u!212 &1987771841
 SpriteRenderer:
   m_ObjectHideFlags: 0
