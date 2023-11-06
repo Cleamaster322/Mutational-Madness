@@ -10,10 +10,8 @@ public class Player : MonoBehaviour
     [Header("Player Animation Settings")]
     public Animator animator;
     public int weapon;
-    public float attackRange;
-    public LayerMask Solid;
-    public float lastDirection;
-    public int damage;
+    public float rot;
+
 
     void Start()
     {
@@ -25,10 +23,11 @@ public class Player : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
-        if (Mathf.Abs(moveX) > 0.1f)
+        if (Mathf.Abs(moveX) > 0)
         {
-            lastDirection = Mathf.Sign(moveX);
+            rot = moveX;
         }
+
 
         Vector2 movement = new Vector2(moveX, moveY);
 
@@ -39,6 +38,7 @@ public class Player : MonoBehaviour
         animator.SetFloat("moveX", moveX);
         animator.SetFloat("moveY", moveY);
         animator.SetInteger("weapon", weapon);
+        animator.SetFloat("rot", rot);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -52,22 +52,8 @@ public class Player : MonoBehaviour
         {
             weapon = 2;
         }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            Attack();
-        }
+        
 
-    }
-    void Attack()
-    {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, attackRange, Solid);
-        foreach (var hit in hits)
-        {
-            Enemy enemy = hit.GetComponent<Enemy>();
-            if (enemy != null && Mathf.Sign(enemy.transform.position.x - transform.position.x) == lastDirection)
-            {
-                enemy.TakeDamage(damage);
-            }
-        }
-    }
+    } 
 }
+    

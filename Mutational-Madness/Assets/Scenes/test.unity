@@ -1137,7 +1137,8 @@ GameObject:
   - component: {fileID: 1987771843}
   - component: {fileID: 1987771844}
   - component: {fileID: 1987771845}
-  m_Layer: 7
+  - component: {fileID: 1987771846}
+  m_Layer: 0
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1159,12 +1160,7 @@ MonoBehaviour:
   speed: 3.5
   animator: {fileID: 1987771845}
   weapon: 2
-  attackRange: 2
-  Solid:
-    serializedVersion: 2
-    m_Bits: 128
-  lastDirection: 0
-  damage: 3
+  rot: 0
 --- !u!212 &1987771841
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1327,6 +1323,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1987771846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987771839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28de751605caff1458cdb15e15d3071c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  lastDirection: 1
+  damage: 2
+  player: {fileID: 1987771840}
 --- !u!1 &1997273344
 GameObject:
   m_ObjectHideFlags: 0
