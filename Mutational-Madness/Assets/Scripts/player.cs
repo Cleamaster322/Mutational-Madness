@@ -8,8 +8,10 @@ public class Player : MonoBehaviour
     public float speed = 5f;
     private Rigidbody2D rb;
     [Header("Player Animation Settings")] 
+
     public Animator animator;
     public int weapon;
+
 
     void Start()
     {
@@ -19,6 +21,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
 
@@ -27,6 +34,7 @@ public class Player : MonoBehaviour
         rb.velocity = movement * speed;
 
         animator = GetComponent<Animator>();
+
 
         animator.SetFloat("moveX", moveX);
         animator.SetFloat("moveY", moveY);
@@ -44,6 +52,7 @@ public class Player : MonoBehaviour
         {
             weapon = 2;
         }
+
 
     }
 }
