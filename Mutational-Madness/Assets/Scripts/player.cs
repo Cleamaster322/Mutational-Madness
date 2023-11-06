@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         animator.SetFloat("moveY", moveY);
         animator.SetInteger("weapon", weapon);
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             SceneManager.LoadScene("MainMenu");
         }
