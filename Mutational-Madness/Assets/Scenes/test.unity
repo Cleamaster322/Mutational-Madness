@@ -1137,7 +1137,7 @@ GameObject:
   - component: {fileID: 1987771843}
   - component: {fileID: 1987771844}
   - component: {fileID: 1987771845}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1159,6 +1159,12 @@ MonoBehaviour:
   speed: 3.5
   animator: {fileID: 1987771845}
   weapon: 2
+  attackRange: 2
+  Solid:
+    serializedVersion: 2
+    m_Bits: 128
+  lastDirection: 0
+  damage: 3
 --- !u!212 &1987771841
 SpriteRenderer:
   m_ObjectHideFlags: 0
