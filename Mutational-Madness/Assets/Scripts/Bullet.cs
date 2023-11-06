@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed;
-    public float lifetime;
+    public double lifetime;
     public float distance;
     public int damage;
     public LayerMask whatIsSolid; 
@@ -26,6 +26,14 @@ public class Bullet : MonoBehaviour
         }
 
         transform.Translate(Vector3.up * speed * Time.deltaTime); 
+        if (lifetime < 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            lifetime = lifetime - 0.05;
+        }
 
     }
 }
