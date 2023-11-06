@@ -11,6 +11,11 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: moveY
     m_EventTreshold: 0.01
+
+  - m_ConditionMode: 6
+    m_ConditionEvent: weapon
+    m_EventTreshold: 2
+
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6146619753746476047}
   m_Solo: 0
@@ -90,6 +95,11 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: moveX
     m_EventTreshold: -0.01
+
+  - m_ConditionMode: 6
+    m_ConditionEvent: weapon
+    m_EventTreshold: 2
+
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8446498586011682114}
   m_Solo: 0
@@ -115,6 +125,11 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: moveX
     m_EventTreshold: -0.01
+
+  - m_ConditionMode: 6
+    m_ConditionEvent: weapon
+    m_EventTreshold: 2
+
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6568969632841435979}
   m_Solo: 0
@@ -140,6 +155,11 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: moveY
     m_EventTreshold: -0.01
+
+  - m_ConditionMode: 6
+    m_ConditionEvent: weapon
+    m_EventTreshold: 2
+
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7949407608320375360}
   m_Solo: 0
@@ -165,6 +185,11 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: moveX
     m_EventTreshold: 0.01
+
+  - m_ConditionMode: 6
+    m_ConditionEvent: weapon
+    m_EventTreshold: 2
+
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5311279640859001993}
   m_Solo: 0
@@ -193,13 +218,23 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+
+    m_Controller: {fileID: 0}
+
   - m_Name: moveY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+
+    m_Controller: {fileID: 0}
+  - m_Name: weapon
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -224,26 +259,30 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 6568969632841435979}
-    m_Position: {x: 140, y: -130, z: 0}
+
+    m_Position: {x: 150, y: -320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5311279640859001993}
-    m_Position: {x: 380, y: -50, z: 0}
+    m_Position: {x: 460, y: -450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8446498586011682114}
-    m_Position: {x: -110, y: -40, z: 0}
+    m_Position: {x: 460, y: -370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6146619753746476047}
-    m_Position: {x: 400, y: -260, z: 0}
+    m_Position: {x: 460, y: -490, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7949407608320375360}
-    m_Position: {x: 150, y: 30, z: 0}
+    m_Position: {x: 460, y: -410, z: 0}
+
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -50, y: -250, z: 0}
-  m_EntryPosition: {x: 160, y: -330, z: 0}
+
+  m_AnyStatePosition: {x: 450, y: -680, z: 0}
+  m_EntryPosition: {x: 170, y: -460, z: 0}
+
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 6568969632841435979}
@@ -258,6 +297,11 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: moveY
     m_EventTreshold: -0.01
+
+  - m_ConditionMode: 6
+    m_ConditionEvent: weapon
+    m_EventTreshold: 2
+
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6568969632841435979}
   m_Solo: 0
@@ -283,6 +327,11 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: moveY
     m_EventTreshold: 0.01
+
+  - m_ConditionMode: 6
+    m_ConditionEvent: weapon
+    m_EventTreshold: 2
+
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6568969632841435979}
   m_Solo: 0
@@ -308,6 +357,11 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: moveX
     m_EventTreshold: 0.01
+
+  - m_ConditionMode: 6
+    m_ConditionEvent: weapon
+    m_EventTreshold: 2
+
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6568969632841435979}
   m_Solo: 0
