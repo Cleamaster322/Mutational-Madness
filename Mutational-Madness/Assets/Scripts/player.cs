@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float speed = 5f;
     private Rigidbody2D rb;
-    [Header("Player Animation Settings")] 
-    public Animator animator; 
+    [Header("Player Animation Settings")]
+    public Animator animator;
+    public int weapon;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        weapon = 1; 
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
 
@@ -31,9 +28,22 @@ public class PlayerMovement : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        animator.SetFloat("moveX", (moveX));
-        animator.SetFloat("moveY", (moveY));
+        animator.SetFloat("moveX", moveX);
+        animator.SetFloat("moveY", moveY);
+        animator.SetInteger("weapon", weapon);
 
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            weapon = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            weapon = 2;
+        }
+
     }
 }
