@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,12 +12,16 @@ public class Player : MonoBehaviour
     public Animator animator;
     public int weapon;
     public float rot;
+    public int flesh;
+    public Text fleshcounter;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         weapon = 1;
+        flesh = 0;
+
     }
 
     void Update()
@@ -39,6 +44,8 @@ public class Player : MonoBehaviour
         animator.SetFloat("moveY", moveY);
         animator.SetInteger("weapon", weapon);
         animator.SetFloat("rot", rot);
+
+
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
