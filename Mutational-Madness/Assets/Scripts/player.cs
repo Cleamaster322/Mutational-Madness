@@ -2,26 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+
+public class Player : Entity
 {
     public float speed = 5f;
     private Rigidbody2D rb;
     [Header("Player Animation Settings")]
     public Animator animator;
     public int weapon;
+    public int radius;
     public float rot;
     public int flesh;
-    public Text fleshcounter;
+    public static Player player;
 
+    private void Awake()
+    {
+        player = this;
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         weapon = 1;
         flesh = 0;
-
+        
     }
 
     void Update()
@@ -32,35 +37,23 @@ public class Player : MonoBehaviour
         {
             rot = moveX;
         }
-
-
         Vector2 movement = new Vector2(moveX, moveY);
-
         rb.velocity = movement * speed;
 
         animator = GetComponent<Animator>();
-
         animator.SetFloat("moveX", moveX);
         animator.SetFloat("moveY", moveY);
         animator.SetInteger("weapon", weapon);
         animator.SetFloat("rot", rot);
 
-
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        Collider2D[] meatColliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        foreach (Collider2D meatCollider in meatColliders)
         {
-            SceneManager.LoadScene("MainMenu");
+            if (meatCollider.gameObject.CompareTag("Meat"))
+            {
+                meatCollider.GetComponent<Magnet>().Attract(this);
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            weapon = 1;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            weapon = 2;
-        }
-        
-
-    } 
+    }
 }
     
