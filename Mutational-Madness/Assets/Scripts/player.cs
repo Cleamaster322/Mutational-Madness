@@ -3,37 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+
+public class Player : Entity
 {
     public float speed = 5f;
     private Rigidbody2D rb;
-    [Header("Player Animation Settings")] 
-    public Animator animator; 
+    [Header("Player Animation Settings")]
+    public Animator animator;
+    public int weapon;
+    public int radius;
+    public float rot;
+    public int flesh;
+    public static Player player;
+
+    private void Awake()
+    {
+        player = this;
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        weapon = 1;
+        flesh = 0;
+        
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
-
+        if (Mathf.Abs(moveX) > 0)
+        {
+            rot = moveX;
+        }
         Vector2 movement = new Vector2(moveX, moveY);
-
         rb.velocity = movement * speed;
 
         animator = GetComponent<Animator>();
+        animator.SetFloat("moveX", moveX);
+        animator.SetFloat("moveY", moveY);
+        animator.SetInteger("weapon", weapon);
+        animator.SetFloat("rot", rot);
 
-        animator.SetFloat("moveX", (moveX));
-        animator.SetFloat("moveY", (moveY));
-
-        
+        Collider2D[] meatColliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        foreach (Collider2D meatCollider in meatColliders)
+        {
+            if (meatCollider.gameObject.CompareTag("Meat"))
+            {
+                meatCollider.GetComponent<Magnet>().Attract(this);
+            }
+        }
     }
 }
+    
