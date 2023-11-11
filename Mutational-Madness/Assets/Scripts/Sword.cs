@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    public float attackRange = 1f;
+    public float attackRange = 2f;
     public LayerMask enemyLayer;
     public float lastDirection = 1f; // 1 for right, -1 for left
     public int damage;
