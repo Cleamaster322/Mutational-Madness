@@ -19,7 +19,7 @@ public class Manager : MonoBehaviour
     void Start()
     {
         fleshcounter.text = "" + player.flesh;
-        
+        UpdateHealthDisplay(player.health);
     }
 
 

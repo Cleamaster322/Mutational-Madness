@@ -24,11 +24,9 @@ public class Enemy : Entity
         {
             transform.position = Vector3.MoveTowards(transform.position, Player.player.transform.position, speed * Time.deltaTime);
         }
-
-
     }
 
-    public void OnTriggerStay2D(Collider2D other)
+    public void OnCollisionStay2D(Collision2D other)
     {
 
         if (timeBtwShots <= 0)
