@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Magnet : MonoBehaviour
 {
-    public float force = 10f;
+    public float force = 2f;
     public float destroyDelay = 1f;
 
     private Rigidbody2D rb;
@@ -27,7 +27,7 @@ public class Magnet : MonoBehaviour
     private void AttractMeat()
     {
         
-         Vector2 direction = (player.transform.position - transform.position).normalized;
+         Vector2 direction = (player.transform.position - transform.position);
          rb.AddForce(direction * force);
        
     }
