@@ -8,6 +8,8 @@ public class Enemy : Entity
     public GameObject meat;
     public Transform enemy;
     private int speed = 2;
+    [Header("Enemy Animation Settings")]
+    public Animator animator;
 
     private float timeBtwShots;
     public float AttackSpeed;
@@ -23,7 +25,12 @@ public class Enemy : Entity
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, Player.player.transform.position, speed * Time.deltaTime);
+
+            animator = GetComponent<Animator>();
+            animator.SetFloat("moveX", transform.position.x - Player.player.transform.position.x);
         }
+
+
     }
 
     public void OnCollisionStay2D(Collision2D other)
