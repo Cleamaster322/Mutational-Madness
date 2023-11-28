@@ -43,3 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Menu
+    uniqueID: 1726658643
+    locked: 0
+  - name: PanSan
+    uniqueID: 380971109
+    locked: 0

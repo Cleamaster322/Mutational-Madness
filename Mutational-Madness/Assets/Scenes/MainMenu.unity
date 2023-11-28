@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 128108200}
   - component: {fileID: 128108199}
   - component: {fileID: 128108198}
-  - component: {fileID: 128108201}
   m_Layer: 7
   m_Name: SettingsButton
   m_TagString: Enemy
@@ -379,23 +378,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128108196}
   m_CullTransparentMesh: 1
---- !u!114 &128108201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128108196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759ffef4b28c0b043a4dd1e70b519b3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 12
-  meat: {fileID: 1589021793}
-  enemy: {fileID: 128108197}
-  animator: {fileID: 0}
-  AttackSpeed: 0
 --- !u!1 &191979826
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,7 +712,6 @@ GameObject:
   - component: {fileID: 526364204}
   - component: {fileID: 526364209}
   - component: {fileID: 526364208}
-  - component: {fileID: 526364207}
   m_Layer: 7
   m_Name: ExitButton
   m_TagString: Enemy
@@ -839,23 +820,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 526364202}
   m_CullTransparentMesh: 1
---- !u!114 &526364207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 526364202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759ffef4b28c0b043a4dd1e70b519b3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 12
-  meat: {fileID: 1589021793}
-  enemy: {fileID: 526364203}
-  animator: {fileID: 0}
-  AttackSpeed: 0
 --- !u!50 &526364208
 Rigidbody2D:
   serializedVersion: 4
@@ -1549,7 +1513,7 @@ MonoBehaviour:
   button1: {fileID: 1901736078}
   button2: {fileID: 128108198}
   button3: {fileID: 526364204}
-  info: {fileID: 736024011}
+  info: {fileID: 0}
   PanSan: {fileID: 1589021793}
 --- !u!1 &736024011
 GameObject:
@@ -1995,7 +1959,6 @@ GameObject:
   - component: {fileID: 1314290173}
   - component: {fileID: 1314290178}
   - component: {fileID: 1314290177}
-  - component: {fileID: 1314290176}
   m_Layer: 7
   m_Name: InfoButton
   m_TagString: Enemy
@@ -2129,23 +2092,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1314290171}
   m_CullTransparentMesh: 1
---- !u!114 &1314290176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314290171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759ffef4b28c0b043a4dd1e70b519b3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 12
-  meat: {fileID: 1589021793}
-  enemy: {fileID: 1314290172}
-  animator: {fileID: 0}
-  AttackSpeed: 0
 --- !u!61 &1314290177
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2544,7 +2490,6 @@ GameObject:
   - component: {fileID: 1589021797}
   - component: {fileID: 1589021796}
   - component: {fileID: 1589021798}
-  - component: {fileID: 1589021799}
   m_Layer: 7
   m_Name: PanSan
   m_TagString: Enemy
@@ -2561,7 +2506,7 @@ Transform:
   m_GameObject: {fileID: 1589021793}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 975.06726, y: 675.0001, z: 8.711966}
+  m_LocalPosition: {x: 876, y: 803, z: 8.711966}
   m_LocalScale: {x: 100, y: 100, z: 1.03125}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2605,8 +2550,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 380971109
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bf42763ba464dce4fbbf9c34d486cbc5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2704,23 +2649,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanSan: {fileID: 1589021793}
---- !u!114 &1589021799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589021793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759ffef4b28c0b043a4dd1e70b519b3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 12
-  meat: {fileID: 1589021793}
-  enemy: {fileID: 1589021794}
-  animator: {fileID: 0}
-  AttackSpeed: 0
 --- !u!1 &1901736076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,7 +2661,6 @@ GameObject:
   - component: {fileID: 1901736080}
   - component: {fileID: 1901736079}
   - component: {fileID: 1901736078}
-  - component: {fileID: 1901736081}
   m_Layer: 7
   m_Name: PlayButton
   m_TagString: Enemy
@@ -2843,23 +2770,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901736076}
   m_CullTransparentMesh: 1
---- !u!114 &1901736081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901736076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759ffef4b28c0b043a4dd1e70b519b3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 12
-  meat: {fileID: 1589021793}
-  enemy: {fileID: 1901736077}
-  animator: {fileID: 0}
-  AttackSpeed: 0
 --- !u!1 &2109229787
 GameObject:
   m_ObjectHideFlags: 0
@@ -2918,7 +2828,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &2109229790
 Canvas:
   m_ObjectHideFlags: 0
@@ -2928,7 +2838,7 @@ Canvas:
   m_GameObject: {fileID: 2109229787}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2939,7 +2849,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1726658643
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &2109229791
@@ -2951,7 +2861,7 @@ RectTransform:
   m_GameObject: {fileID: 2109229787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.969697, y: 0.969697, z: 0.969697}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1113028617}
@@ -2961,9 +2871,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1980, y: 1113.75}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
