@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
                 hitInfo.collider.GetComponent<Enemy>().TakeDamage(damage);
             }
 
-            Destroy(gameObject);
+           // Destroy(gameObject);
 
         }
 
