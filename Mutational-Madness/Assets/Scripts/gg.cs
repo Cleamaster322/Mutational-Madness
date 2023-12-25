@@ -8,12 +8,12 @@ public class gg : MonoBehaviour
     public float startY = 350.0f;
     public float endY = 490.0f;
     public GameObject prefab;
-    public float areaWidth = 1050.0f;
+    public float areaWidth = 900.0f;
     public float areaHeight = 900.0f;
 
     void Update()
     {
-        if (Time.time % 1 < 0.003f)
+        if (Time.time % 1 < 0.007f)
         {
             SpawnBubbbles();
         }
@@ -25,8 +25,8 @@ public class gg : MonoBehaviour
     void SpawnBubbbles()
     {
         // Генерируем случайные координаты внутри прямоугольной области
-        float x = Random.Range(-areaWidth *0.00001f+34, areaWidth / 2);
-        float y = Random.Range(-areaHeight *0.00001f+100, areaHeight / 2);
+        float x = Random.Range(-areaWidth / 4, areaWidth / 2);
+        float y = Random.Range(-areaHeight / 4, areaHeight / 2);
         Vector3 spawnPosition = new Vector3(x, y, 0);
 
         // Спавним объект из префаба в этих координатах

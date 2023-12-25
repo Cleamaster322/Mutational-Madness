@@ -26,11 +26,7 @@ public class Manager : MonoBehaviour
     public void UpdateHealthDisplay(int health)
     {
         int heartDifference = health - hearts.Count;
-        if (health == 0)
-        {
-            SceneManager.LoadScene("PlayMenu");
-        }
-        else if (heartDifference < 0)
+        if (heartDifference < 0)
         {
             Destroy(hearts[hearts.Count + heartDifference]);
         }
@@ -45,7 +41,7 @@ public class Manager : MonoBehaviour
                 }
                 else
                 {
-                    
+                    // Обработка ошибки, если hearts[hearts.Count - 1] равно null
                 }
             }
         }

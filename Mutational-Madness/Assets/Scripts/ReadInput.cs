@@ -6,7 +6,6 @@ public class ReadInput : MonoBehaviour
 {
     private string input;
     public GameObject PanSan;
-    public GameObject gg;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +22,6 @@ public class ReadInput : MonoBehaviour
         input = s;
         if (input == "PanSan!")
         {
-            gg.SetActive(false);
             PanSan.SetActive(true);
         } 
     }

@@ -9,7 +9,6 @@ public class SceneLoader : MonoBehaviour
     public Button button3;
     public GameObject info;
     public GameObject PanSan;
-    
 
     private void Start()
     {
