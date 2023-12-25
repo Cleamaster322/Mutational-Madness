@@ -1,38 +1,45 @@
 using UnityEngine;
 
-public class AttractObject : MonoBehaviour
+public class Magnet : MonoBehaviour
 {
-    public Transform player;
-    public float radius = 5f;
-    public float force = 10f;
+    public float force = 2f;
     public float destroyDelay = 1f;
 
     private Rigidbody2D rb;
+    private Player player;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
+    public void Attract(Player player)
+    {
+        this.player = player;
+    }
     private void FixedUpdate()
     {
-        if (Vector2.Distance(player.position, transform.position) <= radius)
+        if (player != null)
         {
-            Vector2 direction = (player.position - transform.position).normalized;
-            rb.AddForce(direction * force);
+            AttractMeat();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void AttractMeat()
     {
-        if (other.transform == player)
-        {
-            Invoke("DestroyObject", destroyDelay);
-        }
+        
+         Vector2 direction = (player.transform.position - transform.position);
+         rb.AddForce(direction * force);
+       
     }
 
-    private void DestroyObject()
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
+        if (other.transform == player?.transform)
+        {
+            player.flesh++;          
+            Destroy(gameObject, destroyDelay);
+        }
     }
 }
+
+

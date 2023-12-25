@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 476083565720757294}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.7502, y: 1.1181, z: 0}
+  m_LocalPosition: {x: 1.7502, y: 1.1181, z: -0.697}
   m_LocalScale: {x: 0.035508204, y: 0.028401794, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1726658643
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 392e5b811a427d54ab947e698d48ba46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  lifetime: 9
-  distance: 0.5
+  lifetime: 30
+  distance: 10
   damage: 1
   whatIsSolid:
     serializedVersion: 2

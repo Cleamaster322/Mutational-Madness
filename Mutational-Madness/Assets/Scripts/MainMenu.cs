@@ -8,10 +8,13 @@ public class SceneLoader : MonoBehaviour
     public Button button2;
     public Button button3;
     public GameObject info;
+    public GameObject PanSan;
+    
 
     private void Start()
     {
         info.SetActive(false);
+        PanSan.SetActive(false);
     }
 
     void OnEnable()

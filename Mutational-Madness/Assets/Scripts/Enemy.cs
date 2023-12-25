@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+
+public class Enemy : Entity
 {
-    public int health;
     public GameObject meat;
     public Transform enemy;
+    private int speed = 2;
+    [Header("Enemy Animation Settings")]
+    public Animator animator;
+
+    private float timeBtwShots;
+    public float AttackSpeed;
+
 
     private void Update()
     {
@@ -15,10 +22,37 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             Instantiate(meat, enemy.position, enemy.rotation);
         }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, Player.player.transform.position, speed * Time.deltaTime);
+
+            animator = GetComponent<Animator>();
+            animator.SetFloat("moveX", transform.position.x - Player.player.transform.position.x);
+        }
+
+
     }
 
-    public void TakeDamage(int damage)
+    public void OnCollisionStay2D(Collision2D other)
     {
-        health -= damage;
+
+        if (timeBtwShots <= 0)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                other.gameObject.GetComponent<Entity>().TakeDamage(1);
+                timeBtwShots = AttackSpeed;
+            }
+        }
+
+        else
+        {
+            timeBtwShots -= Time.deltaTime;
+        }
+        
     }
+    
+    
+        
 }
+
