@@ -26,5 +26,9 @@ public class ReadInput : MonoBehaviour
             gg.SetActive(false);
             PanSan.SetActive(true);
         } 
+        if (input == "Wham!")
+        {
+            System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=E8gmARGvPlI");
+        }
     }
 }
