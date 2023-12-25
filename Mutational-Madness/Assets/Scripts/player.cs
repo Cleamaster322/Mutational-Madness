@@ -15,6 +15,7 @@ public class Player : Entity
     public float rot;
     public int flesh;
     public static Player player;
+    public int isMoving;
 
     private void Awake()
     {
@@ -24,7 +25,8 @@ public class Player : Entity
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        weapon = 1;
+        weapon = 2;
+        rot = 1;
         flesh = 0;
         
     }
@@ -33,7 +35,16 @@ public class Player : Entity
     {
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
-        if (Mathf.Abs(moveX) > 0)
+        if (moveX != 0 || moveY != 0)
+        {
+            isMoving = 1;
+        }
+        else if (moveX == 0 || moveY == 0)
+        {
+            isMoving = 0;
+        }
+
+            if (Mathf.Abs(moveX) > 0)
         {
             rot = moveX;
         }
@@ -44,6 +55,7 @@ public class Player : Entity
         animator.SetFloat("moveX", moveX);
         animator.SetFloat("moveY", moveY);
         animator.SetInteger("weapon", weapon);
+        animator.SetInteger("moving", isMoving);
         animator.SetFloat("rot", rot);
 
         Collider2D[] meatColliders = Physics2D.OverlapCircleAll(transform.position, radius);

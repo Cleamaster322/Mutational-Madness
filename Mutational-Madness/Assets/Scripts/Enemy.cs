@@ -10,6 +10,7 @@ public class Enemy : Entity
     private int speed = 2;
     [Header("Enemy Animation Settings")]
     public Animator animator;
+    public int damage;
 
     private float timeBtwShots;
     public float AttackSpeed;
@@ -40,7 +41,7 @@ public class Enemy : Entity
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                other.gameObject.GetComponent<Entity>().TakeDamage(1);
+                other.gameObject.GetComponent<Entity>().TakeDamage(damage);
                 timeBtwShots = AttackSpeed;
             }
         }

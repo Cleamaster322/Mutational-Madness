@@ -26,13 +26,16 @@ public class Manager : MonoBehaviour
     public void UpdateHealthDisplay(int health)
     {
         int heartDifference = health - hearts.Count;
-        if (health == 0)
+        if (health <= 0)
         {
             SceneManager.LoadScene("PlayMenu");
         }
         else if (heartDifference < 0)
         {
-            Destroy(hearts[hearts.Count + heartDifference]);
+            for (int i = 1; i <= heartDifference*(-1); i++)
+            {
+                Destroy(hearts[hearts.Count - i]);
+            }
         }
         else if (heartDifference > 0)
         {

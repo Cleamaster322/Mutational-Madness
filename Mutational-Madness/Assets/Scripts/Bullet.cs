@@ -8,32 +8,33 @@ public class Bullet : MonoBehaviour
     public double lifetime;
     public float distance;
     public int damage;
-    public LayerMask whatIsSolid; 
+    public LayerMask whatIsSolid;
+
+    private void Start()
+    {
+        lifetime = 10.0; // ”становите начальное врем€ жизни пули
+    }
 
     private void Update()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, whatIsSolid); 
-        
-        if (hitInfo.collider != null)
-        {
-            if (hitInfo.collider.CompareTag("Enemy"))
-            {
-                hitInfo.collider.GetComponent<Enemy>().TakeDamage(damage);
-            }
+        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        lifetime -= 0.05; // ”меньшаем врем€ жизни на каждом обновлении
 
-           // Destroy(gameObject);
-
-        }
-
-        transform.Translate(Vector3.up * speed * Time.deltaTime); 
-        if (lifetime < 0)
+        if (lifetime <= 0) // ѕровер€ем, если врем€ жизни стало нулем или отрицательным
         {
             Destroy(gameObject);
         }
-        else
-        {
-            lifetime = lifetime - 0.05;
-        }
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy") || other.CompareTag("wall"))
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                other.GetComponent<Enemy>().TakeDamage(damage);
+            }
+            Destroy(gameObject);
+        }
     }
 }
