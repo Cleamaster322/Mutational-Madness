@@ -7,6 +7,7 @@ public class ReadInput : MonoBehaviour
     private string input;
     public GameObject PanSan;
     public GameObject gg;
+    public GameObject Trent;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,13 @@ public class ReadInput : MonoBehaviour
         {
             gg.SetActive(false);
             PanSan.SetActive(true);
-        } 
+        }
+        if (input == "Xmas!")
+        {
+            gg.SetActive(false);
+            Trent.SetActive(true);
+        }
+
         if (input == "Wham!")
         {
             System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=E8gmARGvPlI");

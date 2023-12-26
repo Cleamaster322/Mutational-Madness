@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        lifetime = 10.0; // Установите начальное время жизни пули
+        lifetime = 15.0; // Установите начальное время жизни пули
     }
 
     private void Update()
