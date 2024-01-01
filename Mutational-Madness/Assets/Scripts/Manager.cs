@@ -11,11 +11,18 @@ public class Manager : MonoBehaviour
     private Player player;
     public List<GameObject> hearts;
     public GameObject heartPrefab;
+    public List<Enemy> enemies;
+    public List<ActivationZone> activationZones;
+    private Caretaker caretaker = new Caretaker();
+    public static Manager Instance;
 
     void Awake()
     {
+        Instance = this;
         player = FindObjectOfType<Player>();
     }
+
+    
     void Start()
     {
         fleshcounter.text = "" + player.flesh;
@@ -73,8 +80,66 @@ public class Manager : MonoBehaviour
         {
             player.weapon = 2;
         }
-        
+        else if (Input.GetKeyDown(KeyCode.F5))
+        {
+            SaveGame();
+        }
+        else if (Input.GetKeyDown(KeyCode.F6))
+        {
+            LoadGame();
+        }
+
     }
+    void SaveGame()
+    {
+        Memento memento = new Memento
+        {
+            playerState = player.SaveState(),
+            enemyStates = new List<EnemyMemento>(),
+            activationZoneStates = new List<ActivationZoneMemento>()
+        };
+
+        foreach (var enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                memento.enemyStates.Add(enemy.SaveState());
+            }
+        }
+
+        foreach (var activationZone in activationZones)
+        {
+            memento.activationZoneStates.Add(activationZone.SaveState());
+        }
+
+        caretaker.SaveMemento(memento);
+    }
+
+
+
+    void LoadGame()
+    {
+        Memento memento = caretaker.LoadMemento();
+
+        if (memento != null)
+        {
+            player.RestoreState(memento.playerState);
+
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i] != null)
+                {
+                    enemies[i].RestoreState(memento.enemyStates[i]);
+                }
+            }
+
+            for (int i = 0; i < activationZones.Count; i++)
+            {
+                activationZones[i].RestoreState(memento.activationZoneStates[i]);
+            }
+        }
+    }
+
 
 
 }

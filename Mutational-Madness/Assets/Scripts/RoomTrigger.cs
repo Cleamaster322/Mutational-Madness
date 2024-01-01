@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ActivationZone : MonoBehaviour
 {
     public GameObject[] enemies;
@@ -39,5 +40,37 @@ public class ActivationZone : MonoBehaviour
         }
     }
 
-    
+    public ActivationZoneMemento SaveState()
+    {
+        ActivationZoneMemento memento = new ActivationZoneMemento
+        {
+            enemiesActive = new bool[enemies.Length],
+            flag = flag
+        };
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            memento.enemiesActive[i] = enemies[i].activeSelf;
+        }
+
+        return memento;
+    }
+
+    public void RestoreState(ActivationZoneMemento memento)
+    {
+        flag = memento.flag;
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].SetActive(memento.enemiesActive[i]);
+        }
+    }
+
+}
+
+[System.Serializable]
+public class ActivationZoneMemento
+{
+    public bool[] enemiesActive;
+    public int flag;
 }

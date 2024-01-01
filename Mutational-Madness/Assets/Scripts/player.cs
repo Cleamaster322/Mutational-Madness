@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+
+
 public class Player : Entity
 {
     public float speed = 5f;
@@ -28,7 +30,7 @@ public class Player : Entity
         weapon = 2;
         rot = 1;
         flesh = 0;
-        
+
     }
 
     void Update()
@@ -44,7 +46,7 @@ public class Player : Entity
             isMoving = 0;
         }
 
-            if (Mathf.Abs(moveX) > 0)
+        if (Mathf.Abs(moveX) > 0)
         {
             rot = moveX;
         }
@@ -67,5 +69,34 @@ public class Player : Entity
             }
         }
     }
+
+    public PlayerMemento SaveState()
+    {
+        PlayerMemento memento = new PlayerMemento
+        {
+            health = health,
+            weapon = weapon,
+            flesh = flesh,
+            position = transform.position
+        };
+
+        return memento;
+    }
+    public void RestoreState(PlayerMemento memento)
+    {
+        health = memento.health;
+        weapon = memento.weapon;
+        flesh = memento.flesh;
+        transform.position = memento.position;
+    }
 }
-    
+
+[System.Serializable]
+public class PlayerMemento
+{
+    public int health;
+    public int weapon;
+    public int flesh;
+    public Vector3 position;
+}
+
