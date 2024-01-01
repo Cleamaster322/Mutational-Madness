@@ -24,10 +24,19 @@ public class Manager : MonoBehaviour
 
     
     void Start()
-    {
-        fleshcounter.text = "" + player.flesh;
-        UpdateHealthDisplay(player.health);
-    }
+   {
+       SceneManager.sceneLoaded += OnSceneLoaded;
+       fleshcounter.text = "" + player.flesh;
+       UpdateHealthDisplay(player.health);
+   }
+
+   void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+   {
+       if (scene.name == "test")
+       {
+           LoadGame();
+       }
+   }
 
 
     public void UpdateHealthDisplay(int health)
@@ -112,14 +121,14 @@ public class Manager : MonoBehaviour
             memento.activationZoneStates.Add(activationZone.SaveState());
         }
 
-        caretaker.SaveMemento(memento);
+        caretaker.SaveMemento(memento, SaveLoadData.SelectedSlot);
     }
 
-
-
-    void LoadGame()
+    public void LoadGame()
     {
-        Memento memento = caretaker.LoadMemento();
+        Debug.Log($"Loading game from slot: {SaveLoadData.SelectedSlot}");
+
+        Memento memento = caretaker.LoadMemento(SaveLoadData.SelectedSlot);
 
         if (memento != null)
         {
@@ -138,8 +147,16 @@ public class Manager : MonoBehaviour
                 activationZones[i].RestoreState(memento.activationZoneStates[i]);
             }
         }
+        else
+        {
+            Debug.LogError("No saved game found in the selected slot.");
+        }
     }
 
 
-
 }
+
+
+
+
+

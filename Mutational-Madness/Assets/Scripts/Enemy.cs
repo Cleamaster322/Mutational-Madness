@@ -60,11 +60,11 @@ public class Enemy : Entity
     {
         EnemyMemento memento = new EnemyMemento
         {
-            position = transform.position,
-            scale = transform.localScale,
+            position = new SerializedVector3(transform.position),
+            scale = new SerializedVector3(transform.localScale),
             health = health,
             damage = damage,
-            isActive = gameObject.activeSelf
+            isActive = gameObject.activeSelf ? 1 : 0
         };
 
         return memento;
@@ -72,21 +72,41 @@ public class Enemy : Entity
 
     public void RestoreState(EnemyMemento memento)
     {
-        transform.position = memento.position;
-        transform.localScale = memento.scale;
+        transform.position = memento.position.ToVector3();
+        transform.localScale = memento.scale.ToVector3();
         health = memento.health;
         damage = memento.damage;
-        gameObject.SetActive(memento.isActive);
+        gameObject.SetActive(memento.isActive == 1);
     }
 
 }
 
 [System.Serializable]
+public struct SerializedVector3
+{
+    public float x;
+    public float y;
+    public float z;
+
+    public SerializedVector3(Vector3 vector)
+    {
+        x = vector.x;
+        y = vector.y;
+        z = vector.z;
+    }
+
+    public Vector3 ToVector3()
+    {
+        return new Vector3(x, y, z);
+    }
+}
+
+[System.Serializable]
 public class EnemyMemento
 {
-    public Vector3 position;
-    public Vector3 scale;
+    public SerializedVector3 position;
+    public SerializedVector3 scale;
     public int health;
     public int damage;
-    public bool isActive;
+    public int isActive;
 }

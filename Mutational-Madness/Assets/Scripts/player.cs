@@ -77,26 +77,33 @@ public class Player : Entity
             health = health,
             weapon = weapon,
             flesh = flesh,
-            position = transform.position
+            x = transform.position.x,
+            y = transform.position.y,
+            z = transform.position.z
         };
 
         return memento;
     }
+
     public void RestoreState(PlayerMemento memento)
     {
         health = memento.health;
         weapon = memento.weapon;
         flesh = memento.flesh;
-        transform.position = memento.position;
+        transform.position = new Vector3(memento.x, memento.y, memento.z);
     }
+
 }
 
 [System.Serializable]
-public class PlayerMemento
+public struct PlayerMemento
 {
     public int health;
     public int weapon;
     public int flesh;
-    public Vector3 position;
+    public float x;
+    public float y;
+    public float z;
 }
+
 
