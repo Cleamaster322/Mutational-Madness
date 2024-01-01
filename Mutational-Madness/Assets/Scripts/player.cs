@@ -26,6 +26,7 @@ public class Player : Entity
 
     void Start()
     {
+        player = this;
         rb = GetComponent<Rigidbody2D>();
         weapon = 2;
         rot = 1;
@@ -87,11 +88,19 @@ public class Player : Entity
 
     public void RestoreState(PlayerMemento memento)
     {
-        health = memento.health;
-        weapon = memento.weapon;
-        flesh = memento.flesh;
-        transform.position = new Vector3(memento.x, memento.y, memento.z);
+        if (player != null)
+        {
+            health = memento.health;
+            weapon = memento.weapon;
+            flesh = memento.flesh;
+            transform.position = new Vector3(memento.x, memento.y, memento.z);
+        }
+        else
+        {
+            Debug.LogError("Player object is null");
+        }
     }
+
 
 }
 

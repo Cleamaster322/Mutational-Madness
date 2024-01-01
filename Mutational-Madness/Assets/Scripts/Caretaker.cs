@@ -36,7 +36,7 @@ public class Caretaker
         }
         else
         {
-            Debug.LogError("File does not exist: " + path);
+            Debug.Log("File does not exist: " + path);
             return null;
         }
     }

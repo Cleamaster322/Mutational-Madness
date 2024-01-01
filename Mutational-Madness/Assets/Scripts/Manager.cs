@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,28 +16,83 @@ public class Manager : MonoBehaviour
     public List<ActivationZone> activationZones;
     private Caretaker caretaker = new Caretaker();
     public static Manager Instance;
+    private bool isDestroyed = false;
 
     void Awake()
     {
         Instance = this;
+        SceneManager.sceneLoaded += OnSceneLoaded;
         player = FindObjectOfType<Player>();
     }
-
     
+
     void Start()
    {
-       SceneManager.sceneLoaded += OnSceneLoaded;
-       fleshcounter.text = "" + player.flesh;
-       UpdateHealthDisplay(player.health);
+
+        player = FindObjectOfType<Player>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        fleshcounter.text = "" + player.flesh;
+        UpdateHealthDisplay(player.health);
    }
 
-   void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-   {
-       if (scene.name == "test")
-       {
-           LoadGame();
-       }
-   }
+
+
+    
+
+   
+
+    void OnDestroy()
+    {
+        isDestroyed = true;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (!isDestroyed && scene.name == "test")
+        {
+            StartCoroutine(WaitAndLoadGame());
+        }
+    }
+
+    IEnumerator WaitAndLoadGame()
+    {
+        // ∆дем одну кадровую частоту (около 60 миллисекунд), чтобы дать Unity врем€ на инициализацию всех объектов
+        yield return null;
+
+        if (Player.player != null)
+        {
+            Memento memento = caretaker.LoadMemento(SaveLoadData.SelectedSlot);
+            if (memento != null)
+            {
+                Player.player.RestoreState(memento.playerState);
+
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    if (enemies[i] != null)
+                    {
+                        enemies[i].RestoreState(memento.enemyStates[i]);
+                    }
+                }
+
+                for (int i = 0; i < activationZones.Count; i++)
+                {
+                    activationZones[i].RestoreState(memento.activationZoneStates[i]);
+                }
+                Debug.Log($"Loaded game from slot: {SaveLoadData.SelectedSlot}");
+            }
+            else
+            {
+                Debug.Log("No saved game found in the selected slot.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player object is null");
+        }
+    }
+
+
 
 
     public void UpdateHealthDisplay(int health)
@@ -97,6 +153,10 @@ public class Manager : MonoBehaviour
         {
             LoadGame();
         }
+        else if (Input.GetKeyDown(KeyCode.F12))
+        {
+            ResetGame();
+        }
 
     }
     void SaveGame()
@@ -149,7 +209,19 @@ public class Manager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("No saved game found in the selected slot.");
+            Debug.Log("No saved game found in the selected slot.");
+        }
+    }
+    public void ResetGame()
+    {
+        string path = Path.Combine(Application.persistentDataPath, "save" + SaveLoadData.SelectedSlot + ".dat");
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
         }
     }
 

@@ -13,24 +13,22 @@ public class LoadMenu : MonoBehaviour
     {
         button1.onClick.AddListener(() =>
         {
-            SaveLoadData.SelectedSlot = 0;
-            Debug.Log($"Selected slot: {SaveLoadData.SelectedSlot}");
+            SaveLoadData.SelectedSlot = 1;
             LoadScene("test");
         });
         button2.onClick.AddListener(() =>
         {
-            SaveLoadData.SelectedSlot = 1;
-            Debug.Log($"Selected slot: {SaveLoadData.SelectedSlot}");
+            SaveLoadData.SelectedSlot = 2;
             LoadScene("test");
         });
         button3.onClick.AddListener(() =>
         {
-            SaveLoadData.SelectedSlot = 2;
-            Debug.Log($"Selected slot: {SaveLoadData.SelectedSlot}");
+            SaveLoadData.SelectedSlot = 3;
             LoadScene("test");
         });
-
         button4.onClick.AddListener(() => LoadScene("PlayMenu"));
+
+        
     }
 
     public void LoadScene(string sceneName)
