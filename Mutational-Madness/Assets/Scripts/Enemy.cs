@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -17,16 +18,38 @@ public class Enemy : Entity
     private float timeBtwShots;
     public float AttackSpeed;
 
+    private AudioClip[] mobHurtSounds;
+    private AudioClip[] mobDeathSounds;
+    private AudioSource audioSourceHurt;
+    private AudioSource audioSourceDeath;
+    private Rigidbody2D rb2d;
+    private CapsuleCollider2D cc2d;
+
+    void Start()
+    {
+
+        rb2d = GetComponent<Rigidbody2D>(); 
+        cc2d = GetComponent<CapsuleCollider2D>();
+        audioSourceHurt = gameObject.AddComponent<AudioSource>(); 
+        audioSourceDeath = gameObject.AddComponent<AudioSource>(); mobHurtSounds = new AudioClip[]
+        {
+         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_hurt1.wav"),
+         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_hurt2.wav"),
+         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_hurt3.wav")
+        }; 
+        mobDeathSounds = new AudioClip[]
+        {
+         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_death1.wav"),
+         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_death2.wav")
+        };
+
+        audioSourceHurt.volume = 0.2f;
+        audioSourceDeath.volume = 0.2f;
+    }
 
     private void Update()
     {
-        if (health <= 0)
-        {
-            
-            gameObject.SetActive(false);
-            Instantiate(meat, enemy.position, enemy.rotation);
-        }
-        else
+        if (health > 0) 
         {
             transform.position = Vector3.MoveTowards(transform.position, Player.player.transform.position, speed * Time.deltaTime);
 
@@ -37,6 +60,28 @@ public class Enemy : Entity
 
     }
 
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        if (health > 0)
+        {
+            audioSourceHurt.PlayOneShot(mobHurtSounds[Random.Range(0, mobHurtSounds.Length)]); 
+        }
+        else { StartCoroutine(PlayDeathSoundAndDie()); }
+    }
+    IEnumerator PlayDeathSoundAndDie()
+    {
+        rb2d.isKinematic = true; 
+        cc2d.enabled = false;
+        damage = 0;
+        audioSourceDeath.PlayOneShot(mobDeathSounds[Random.Range(0, mobDeathSounds.Length)]);
+        yield return new WaitWhile(() => audioSourceDeath.isPlaying);
+        gameObject.SetActive(false);
+        Instantiate(meat, enemy.position, enemy.rotation);
+    }
+
+
     public void OnCollisionStay2D(Collision2D other)
     {
 
@@ -44,7 +89,7 @@ public class Enemy : Entity
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                other.gameObject.GetComponent<Entity>().TakeDamage(damage);
+                other.gameObject.GetComponent<Player>().TakeDamage(damage);
                 timeBtwShots = AttackSpeed;
             }
         }

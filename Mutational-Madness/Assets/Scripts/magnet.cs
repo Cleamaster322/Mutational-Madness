@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class Magnet : MonoBehaviour
@@ -7,10 +8,13 @@ public class Magnet : MonoBehaviour
 
     private Rigidbody2D rb;
     private Player player;
+    
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        
     }
     public void Attract(Player player)
     {
@@ -36,7 +40,8 @@ public class Magnet : MonoBehaviour
     {
         if (other.transform == player?.transform)
         {
-            player.flesh++;          
+            
+            player.Eat();          
             Destroy(gameObject, destroyDelay);
         }
     }

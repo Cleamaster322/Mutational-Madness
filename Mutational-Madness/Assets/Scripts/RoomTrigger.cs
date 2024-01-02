@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -10,17 +11,24 @@ public class ActivationZone : MonoBehaviour
     private int flag;
     public int room;
     private Player player;
+    public AudioClip roomEnteringSound; 
+    public AudioSource audioSource;
+
     void Awake()
     {
         player = FindObjectOfType<Player>();
     }
     private void Start()
     {
+        flag = 0;
         foreach (var enemy in enemies)
         {
-            enemy.SetActive(false);
-            flag = 0;
+            enemy.SetActive(false);       
         }
+
+        audioSource = gameObject.AddComponent<AudioSource>(); 
+        roomEnteringSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/room_entering.wav");
+        audioSource.volume = 0.2f;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -29,6 +37,7 @@ public class ActivationZone : MonoBehaviour
         if (flag == 0 & other.gameObject.CompareTag("Player"))
         {
             flag = 1;
+            audioSource.PlayOneShot(roomEnteringSound);
             foreach (var enemy in enemies)
             {              
                 enemy.SetActive(true);        

@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
-
 
 public class Player : Entity
 {
@@ -18,6 +16,14 @@ public class Player : Entity
     public int flesh;
     public static Player player;
     public int isMoving;
+    private AudioSource audioSourceWalk;
+    private AudioSource audioSourceHurt;
+    private AudioSource audioSourceSilence;
+    private AudioClip[] damageSounds;
+    private AudioClip walkSound;
+    private AudioClip silenceSound;
+    private AudioClip eatSound;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -32,6 +38,33 @@ public class Player : Entity
         rot = 1;
         flesh = 0;
 
+        string[] paths = new string[]
+     {
+        "Assets/gamesound/gg_hurt1.wav",
+        "Assets/gamesound/gg_hurt2.wav",
+        "Assets/gamesound/gg_hurt3.wav"
+     };
+
+        damageSounds = new AudioClip[paths.Length];
+
+        for (int i = 0; i < paths.Length; i++)
+        {
+            damageSounds[i] = AssetDatabase.LoadAssetAtPath<AudioClip>(paths[i]);
+        }
+
+        walkSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/steps.ogg");
+        audioSourceWalk = gameObject.AddComponent<AudioSource>();
+        audioSourceWalk.clip = walkSound;
+
+
+        silenceSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/silence.ogg"); 
+        audioSourceSilence = gameObject.AddComponent<AudioSource>(); 
+        audioSourceSilence.clip = silenceSound;
+
+        audioSourceHurt = gameObject.AddComponent<AudioSource>();
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        eatSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/eating.ogg");
     }
 
     void Update()
@@ -41,10 +74,22 @@ public class Player : Entity
         if (moveX != 0 || moveY != 0)
         {
             isMoving = 1;
+            if (!audioSourceWalk.isPlaying)
+            {
+                audioSourceWalk.loop = true;
+                audioSourceWalk.Play();
+                audioSourceSilence.Stop();
+            }
         }
         else if (moveX == 0 || moveY == 0)
         {
             isMoving = 0;
+            audioSourceWalk.Stop();
+            if (!audioSourceSilence.isPlaying) 
+            {
+                audioSourceSilence.loop = true;
+                audioSourceSilence.Play();
+            }
         }
 
         if (Mathf.Abs(moveX) > 0)
@@ -70,7 +115,18 @@ public class Player : Entity
             }
         }
     }
+    public override void TakeDamage(int amount)
+    {
+        base.TakeDamage(amount);
+        audioSourceHurt.PlayOneShot(damageSounds[Random.Range(0, damageSounds.Length)]);
+    }
 
+    
+    public void Eat()
+    {
+        audioSource.PlayOneShot(eatSound);
+        flesh++;
+    }
     public PlayerMemento SaveState()
     {
         PlayerMemento memento = new PlayerMemento
@@ -100,8 +156,6 @@ public class Player : Entity
             Debug.LogError("Player object is null");
         }
     }
-
-
 }
 
 [System.Serializable]
@@ -114,5 +168,3 @@ public struct PlayerMemento
     public float y;
     public float z;
 }
-
-

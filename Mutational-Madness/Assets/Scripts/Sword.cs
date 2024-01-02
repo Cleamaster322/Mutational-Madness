@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class Sword : MonoBehaviour
@@ -7,6 +8,16 @@ public class Sword : MonoBehaviour
     public float lastDirection = 1f; // 1 for right, -1 for left
     public int damage;
     public Player player;
+    public AudioClip swordAttackSound; 
+    public AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        swordAttackSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/sword_attack.wav"); // Добавлено
+        audioSource.clip = swordAttackSound;
+        audioSource.volume = 0.6f;
+    }
 
     void Update()
     {
@@ -17,6 +28,7 @@ public class Sword : MonoBehaviour
 
                 player.animator.SetBool("SwingLeft", true);
                 player.animator.SetBool("SwingRight", true);
+                audioSource.Play();
             }
         }
 
@@ -43,7 +55,7 @@ public class Sword : MonoBehaviour
             Enemy enemy = hit.GetComponent<Enemy>();
             if (enemy != null && Mathf.Sign(enemy.transform.position.x - transform.position.x) == lastDirection)
             {
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(damage);             
             }
         }
     }

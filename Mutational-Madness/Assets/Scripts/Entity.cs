@@ -6,7 +6,7 @@ public class Entity : MonoBehaviour
 {
     public int health;     
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         health -= damage;       
     }
