@@ -28,7 +28,7 @@ public class Manager : MonoBehaviour
 
     void Start()
    {
-
+        MusicManager.instance.StopMusic();
         player = FindObjectOfType<Player>();
         SceneManager.sceneLoaded += OnSceneLoaded;
         fleshcounter.text = "" + player.flesh;
@@ -136,6 +136,7 @@ public class Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu");
+            MusicManager.instance.PlayMusic();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
