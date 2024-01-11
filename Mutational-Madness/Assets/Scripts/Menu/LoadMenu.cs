@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class LoadMenu : MonoBehaviour
 {
+    //Not much to say, just load
     public Button button1;
     public Button button2;
     public Button button3;

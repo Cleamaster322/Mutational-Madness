@@ -3,18 +3,15 @@ using UnityEngine;
 
 public class Magnet : MonoBehaviour
 {
+    //basically for meat(ingame currency) moving
     public float force = 2f;
     public float destroyDelay = 1f;
-
     private Rigidbody2D rb;
     private Player player;
     
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        
     }
     public void Attract(Player player)
     {

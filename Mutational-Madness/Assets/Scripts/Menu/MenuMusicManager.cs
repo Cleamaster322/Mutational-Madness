@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
+    //Use me to control sound level, a.k.a. mixer
     public static MusicManager instance = null;
     private AudioSource audioSource;
     private AudioSource gameAudioSource;

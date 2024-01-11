@@ -5,22 +5,20 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    //Gun using complex math functions
     public float offset;
     public GameObject bullet;
     public Transform shotPoint;
     public Player player;
-
-    public AudioClip gunShotSound; // Добавлено
-    public AudioSource audioSource; // Добавлено
-
+    public AudioClip gunShotSound;
+    public AudioSource audioSource;
     private float timeBtwShots;
     public float startTimeBtwShots;
 
     void Start()
     {
-        // Добавлено
         audioSource = gameObject.AddComponent<AudioSource>();
-        gunShotSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/gun_shot.wav"); // Добавлено
+        gunShotSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/gun_shot.wav");
         audioSource.clip = gunShotSound;
         audioSource.volume = MusicManager.instance.GetGameVolume();
     }
@@ -39,7 +37,7 @@ public class Gun : MonoBehaviour
                 {
                     Instantiate(bullet, shotPoint.position, transform.rotation);
                     timeBtwShots = startTimeBtwShots;
-                    audioSource.Play(); // Добавлено
+                    audioSource.Play(); 
                 }
             }
 

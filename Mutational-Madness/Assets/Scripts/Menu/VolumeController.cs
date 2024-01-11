@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class VolumeController : MonoBehaviour
 {
+    //slider's control for sound level
     public Slider volumeSlider;
     public Slider ingamevolumeSlider;
 

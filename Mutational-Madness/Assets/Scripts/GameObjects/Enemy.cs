@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-
-
-
 public class Enemy : Entity
 {
     public GameObject meat;
@@ -14,10 +11,8 @@ public class Enemy : Entity
     [Header("Enemy Animation Settings")]
     public Animator animator;
     public int damage;
-
     private float timeBtwShots;
     public float AttackSpeed;
-
     private AudioClip[] mobHurtSounds;
     private AudioClip[] mobDeathSounds;
     private AudioSource audioSourceHurt;
@@ -31,37 +26,21 @@ public class Enemy : Entity
         render = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>(); 
         cc2d = GetComponent<CapsuleCollider2D>();
-        audioSourceHurt = gameObject.AddComponent<AudioSource>(); 
-        audioSourceDeath = gameObject.AddComponent<AudioSource>(); mobHurtSounds = new AudioClip[]
-        {
-         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_hurt1.wav"),
-         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_hurt2.wav"),
-         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_hurt3.wav")
-        }; 
-        mobDeathSounds = new AudioClip[]
-        {
-         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_death1.wav"),
-         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_death2.wav")
-        };
-
-        audioSourceHurt.volume = (MusicManager.instance.GetGameVolume())/3;
-        audioSourceDeath.volume = (MusicManager.instance.GetGameVolume())/3; 
+        LoadSound();
     }
 
     private void Update()
     {
         if (health > 0) 
         {
+            //moving
             transform.position = Vector3.MoveTowards(transform.position, Player.player.transform.position, speed * Time.deltaTime);
-
             animator = GetComponent<Animator>();
             animator.SetFloat("moveX", transform.position.x - Player.player.transform.position.x);
         }
-
-
     }
 
-
+    //Damage taking block
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
@@ -89,10 +68,9 @@ public class Enemy : Entity
         render.material.color = Color.white;
     }
 
-
+    //Damage dealing
     public void OnCollisionStay2D(Collision2D other)
     {
-
         if (timeBtwShots <= 0)
         {
             if (other.gameObject.CompareTag("Player"))
@@ -101,14 +79,32 @@ public class Enemy : Entity
                 timeBtwShots = AttackSpeed;
             }
         }
-
         else
         {
             timeBtwShots -= Time.deltaTime;
         }
-        
     }
 
+    //block for sound management
+    void LoadSound()
+    {
+        audioSourceHurt = gameObject.AddComponent<AudioSource>();
+        audioSourceDeath = gameObject.AddComponent<AudioSource>(); mobHurtSounds = new AudioClip[]
+        {
+         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_hurt1.wav"),
+         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_hurt2.wav"),
+         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_hurt3.wav")
+        };
+        mobDeathSounds = new AudioClip[]
+        {
+         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_death1.wav"),
+         AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_death2.wav")
+        };
+
+        audioSourceHurt.volume = (MusicManager.instance.GetGameVolume()) / 3;
+        audioSourceDeath.volume = (MusicManager.instance.GetGameVolume()) / 3;
+    }
+    //Memento saving block
     public EnemyMemento SaveState()
     {
         EnemyMemento memento = new EnemyMemento

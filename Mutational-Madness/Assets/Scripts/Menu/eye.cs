@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class eye : MonoBehaviour
 {
+    //For little eye following coursor
     public float moveSpeed = 10;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-   
     void Update()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

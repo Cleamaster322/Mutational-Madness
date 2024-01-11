@@ -40,42 +40,12 @@ public class Player : Entity
         rot = 1;
         flesh = 0;
         render = GetComponent<SpriteRenderer>();
-
-        string[] paths = new string[]
-     {
-        "Assets/gamesound/gg_hurt1.wav",
-        "Assets/gamesound/gg_hurt2.wav",
-        "Assets/gamesound/gg_hurt3.wav"
-     };
-
-        damageSounds = new AudioClip[paths.Length];
-
-        for (int i = 0; i < paths.Length; i++)
-        {
-            damageSounds[i] = AssetDatabase.LoadAssetAtPath<AudioClip>(paths[i]);
-        }
-
-        walkSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/steps.ogg");
-        audioSourceWalk = gameObject.AddComponent<AudioSource>();
-        audioSourceWalk.clip = walkSound;
-
-        silenceSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/silence.ogg"); 
-        audioSourceSilence = gameObject.AddComponent<AudioSource>(); 
-        audioSourceSilence.clip = silenceSound;
-
-        audioSourceHurt = gameObject.AddComponent<AudioSource>();
-
-        audioSource = gameObject.AddComponent<AudioSource>();
-        eatSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/eating.ogg");
-
-        audioSourceWalk.volume = MusicManager.instance.GetGameVolume();
-        audioSourceSilence.volume = MusicManager.instance.GetGameVolume();
-        audioSourceHurt.volume = MusicManager.instance.GetGameVolume();
-        audioSource.volume = MusicManager.instance.GetGameVolume();
+        LoadSound();
     }
 
     void Update()
     {
+        //moving
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
         if (moveX != 0 || moveY != 0)
@@ -105,14 +75,14 @@ public class Player : Entity
         }
         Vector2 movement = new Vector2(moveX, moveY);
         rb.velocity = movement * speed;
-
+        //animate
         animator = GetComponent<Animator>();
         animator.SetFloat("moveX", moveX);
         animator.SetFloat("moveY", moveY);
         animator.SetInteger("weapon", weapon);
         animator.SetInteger("moving", isMoving);
         animator.SetFloat("rot", rot);
-
+        //collecting meat
         Collider2D[] meatColliders = Physics2D.OverlapCircleAll(transform.position, radius);
         foreach (Collider2D meatCollider in meatColliders)
         {
@@ -122,6 +92,7 @@ public class Player : Entity
             }
         }
     }
+    //whole damage block
     public override void TakeDamage(int amount)
     {
         base.TakeDamage(amount);
@@ -142,6 +113,43 @@ public class Player : Entity
         audioSource.PlayOneShot(eatSound);
         flesh++;
     }
+    //sound block
+    void LoadSound()
+    {
+        string[] paths = new string[]
+     {
+        "Assets/gamesound/gg_hurt1.wav",
+        "Assets/gamesound/gg_hurt2.wav",
+        "Assets/gamesound/gg_hurt3.wav"
+     };
+
+        damageSounds = new AudioClip[paths.Length];
+
+        for (int i = 0; i < paths.Length; i++)
+        {
+            damageSounds[i] = AssetDatabase.LoadAssetAtPath<AudioClip>(paths[i]);
+        }
+
+        walkSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/steps.ogg");
+        audioSourceWalk = gameObject.AddComponent<AudioSource>();
+        audioSourceWalk.clip = walkSound;
+
+        silenceSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/silence.ogg");
+        audioSourceSilence = gameObject.AddComponent<AudioSource>();
+        audioSourceSilence.clip = silenceSound;
+
+        audioSourceHurt = gameObject.AddComponent<AudioSource>();
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        eatSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/eating.ogg");
+
+        audioSourceWalk.volume = MusicManager.instance.GetGameVolume();
+        audioSourceSilence.volume = MusicManager.instance.GetGameVolume();
+        audioSourceHurt.volume = MusicManager.instance.GetGameVolume();
+        audioSource.volume = MusicManager.instance.GetGameVolume();
+    }
+
+    //memento saving block
     public PlayerMemento SaveState()
     {
         PlayerMemento memento = new PlayerMemento

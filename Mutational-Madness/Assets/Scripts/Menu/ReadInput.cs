@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class ReadInput : MonoBehaviour
 {
+    //That's for eggs
     private string input;
     public GameObject PanSan;
     public GameObject gg;
     public GameObject Trent;
-    // Start is called before the first frame update
-    
-    
+   
     public void ReadStringInput(string s)
     {
         input = s;

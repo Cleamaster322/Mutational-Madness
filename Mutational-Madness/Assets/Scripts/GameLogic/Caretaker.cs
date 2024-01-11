@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class Caretaker
 {
+    //caretaker class for memento
     private Memento memento;
     private int currentSlot;
 

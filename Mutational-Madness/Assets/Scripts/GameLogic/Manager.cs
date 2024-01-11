@@ -5,10 +5,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+//Don't look at me!!
 public class Manager : MonoBehaviour
 {
+    //basically main class
     public Text fleshcounter;
-    
     private Player player;
     public List<GameObject> hearts;
     public GameObject heartPrefab;
@@ -36,11 +37,6 @@ public class Manager : MonoBehaviour
    }
 
 
-
-    
-
-   
-
     void OnDestroy()
     {
         isDestroyed = true;
@@ -57,7 +53,7 @@ public class Manager : MonoBehaviour
 
     IEnumerator WaitAndLoadGame()
     {
-        // ∆дем одну кадровую частоту (около 60 миллисекунд), чтобы дать Unity врем€ на инициализацию всех объектов
+        // We'll have to wait 'till game load fully before playing
         yield return null;
 
         if (Player.player != null)
@@ -94,9 +90,10 @@ public class Manager : MonoBehaviour
 
 
 
-
+    
     public void UpdateHealthDisplay(int health)
     {
+        //hearts is a list, so update them
         int heartDifference = health - hearts.Count;
         if (health <= 0)
         {
@@ -132,7 +129,7 @@ public class Manager : MonoBehaviour
         fleshcounter.text = "" + player.flesh;
         
         UpdateHealthDisplay(player.health);
-
+        //input block
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu");
@@ -162,6 +159,7 @@ public class Manager : MonoBehaviour
     }
     void SaveGame()
     {
+        //Save
         Memento memento = new Memento
         {
             playerState = player.SaveState(),
@@ -187,6 +185,7 @@ public class Manager : MonoBehaviour
 
     public void LoadGame()
     {
+        //Load
         Debug.Log($"Loading game from slot: {SaveLoadData.SelectedSlot}");
 
         Memento memento = caretaker.LoadMemento(SaveLoadData.SelectedSlot);
@@ -215,6 +214,7 @@ public class Manager : MonoBehaviour
     }
     public void ResetGame()
     {
+        //reset
         string path = Path.Combine(Application.persistentDataPath, "save" + SaveLoadData.SelectedSlot + ".dat");
         if (File.Exists(path))
         {
@@ -225,8 +225,6 @@ public class Manager : MonoBehaviour
             Debug.LogError("Save file not found in " + path);
         }
     }
-
-
 }
 
 

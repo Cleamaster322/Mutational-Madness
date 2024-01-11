@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class WindowManager : MonoBehaviour
 {
+    //Used in the settings menu, now disabled
     public List<GameObject> windows;
     public List<Button> buttons;
 

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    //Noyhing much, practically useless
     public Button button1;
     public Button button2;
     public Button button3;

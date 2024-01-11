@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    //creating a bullet, bullet mechanics
     public float speed;
     public double lifetime;
     public float distance;
@@ -12,15 +13,15 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        lifetime = 15.0; // ”становите начальное врем€ жизни пули
+        lifetime = 15.0; 
     }
 
     private void Update()
     {
         transform.Translate(Vector3.up * speed * Time.deltaTime);
-        lifetime -= 0.05; // ”меньшаем врем€ жизни на каждом обновлении
+        lifetime -= 0.05; 
 
-        if (lifetime <= 0) // ѕровер€ем, если врем€ жизни стало нулем или отрицательным
+        if (lifetime <= 0) 
         {
             Destroy(gameObject);
         }

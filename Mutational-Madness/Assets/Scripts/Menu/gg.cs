@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class gg : MonoBehaviour
 {
+    //for MainHero in bubbles swimming in the menu scene
     public float speed = 0.1f;
     public float startY = 350.0f;
     public float endY = 490.0f;
@@ -24,19 +25,11 @@ public class gg : MonoBehaviour
     }
     void SpawnBubbbles()
     {
-        // Генерируем случайные координаты внутри прямоугольной области
         float x = Random.Range(-areaWidth *0.00001f+34, areaWidth / 2);
         float y = Random.Range(-areaHeight *0.00001f+100, areaHeight / 2);
         Vector3 spawnPosition = new Vector3(x, y, 0);
-
-        // Спавним объект из префаба в этих координатах
         GameObject spawnedObject = Instantiate(prefab, spawnPosition, Quaternion.identity);
-
-        // Примените силу к объекту, чтобы он начал двигаться вверх
         spawnedObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 0.01f), ForceMode2D.Impulse);
-
-
-        // Удалить объект через 2 секунды
         Destroy(spawnedObject, 3.0f);
     }
 

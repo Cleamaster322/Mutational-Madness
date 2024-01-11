@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ActivationZone : MonoBehaviour
 {
+    //Triggers by the entries of the rooms, each has list of monsters
     public GameObject[] enemies;
     public float fallSpeed = 1f;
     private int flag;
