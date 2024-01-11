@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 1087471813}
+  ingamevolumeSlider: {fileID: 800080276}
 --- !u!4 &157475113
 Transform:
   m_ObjectHideFlags: 0
@@ -980,7 +981,7 @@ GameObject:
   - component: {fileID: 800080275}
   - component: {fileID: 800080276}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: GameSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

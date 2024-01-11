@@ -28,7 +28,7 @@ public class ActivationZone : MonoBehaviour
 
         audioSource = gameObject.AddComponent<AudioSource>(); 
         roomEnteringSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/room_entering.wav");
-        audioSource.volume = 0.2f;
+        audioSource.volume = MusicManager.instance.GetGameVolume()/5;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

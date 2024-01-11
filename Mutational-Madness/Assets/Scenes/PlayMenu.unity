@@ -1058,7 +1058,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CONTINUE
+  m_text: LAST GAME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7d012e2421e36824daba75d165771e74, type: 2}
   m_sharedMaterial: {fileID: -7540098080295948742, guid: 7d012e2421e36824daba75d165771e74, type: 2}

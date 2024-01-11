@@ -22,6 +22,7 @@ public class Gun : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         gunShotSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/gun_shot.wav"); // Добавлено
         audioSource.clip = gunShotSound;
+        audioSource.volume = MusicManager.instance.GetGameVolume();
     }
 
     void Update()

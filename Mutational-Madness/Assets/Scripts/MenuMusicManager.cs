@@ -6,7 +6,8 @@ public class MusicManager : MonoBehaviour
     public static MusicManager instance = null;
     private AudioSource audioSource;
     private AudioSource gameAudioSource;
-    public float volume;
+    public float musicVolume;
+    public float gameVolume;
     void Awake()
     {
        
@@ -19,7 +20,8 @@ public class MusicManager : MonoBehaviour
 
         audioSource = gameObject.AddComponent<AudioSource>();
         gameAudioSource = gameObject.AddComponent<AudioSource>();
-        volume = 1.0f;
+        musicVolume = 1.0f;
+        gameVolume = 1.0f;
     }
 
     void Start()
@@ -27,13 +29,13 @@ public class MusicManager : MonoBehaviour
         string path = "Assets/gamesound/ingame1slow.mp3";
         AudioClip clip = (AudioClip)AssetDatabase.LoadAssetAtPath(path, typeof(AudioClip));
         audioSource.clip = clip;
-        audioSource.volume = volume;
+        audioSource.volume = musicVolume;
         audioSource.loop = true;
         audioSource.Play();
         string pathGame = "Assets/gamesound/menu.mp3";
         AudioClip clipGame = (AudioClip)AssetDatabase.LoadAssetAtPath(pathGame, typeof(AudioClip));
         gameAudioSource.clip = clipGame;
-        gameAudioSource.volume = volume;
+        gameAudioSource.volume = musicVolume;
         gameAudioSource.loop = true;
         
     }
@@ -56,6 +58,15 @@ public class MusicManager : MonoBehaviour
 
     public float GetVolume()
     {
-        return this.volume;
+        return this.musicVolume;
+    }
+    public void ChangeGameVolume(float value)
+    {
+        gameVolume = value;
+    }
+
+    public float GetGameVolume()
+    {
+        return this.gameVolume;
     }
 }

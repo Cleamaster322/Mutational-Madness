@@ -24,6 +24,8 @@ public class Player : Entity
     private AudioClip silenceSound;
     private AudioClip eatSound;
     private AudioSource audioSource;
+    private SpriteRenderer render;
+    
 
     private void Awake()
     {
@@ -37,6 +39,7 @@ public class Player : Entity
         weapon = 2;
         rot = 1;
         flesh = 0;
+        render = GetComponent<SpriteRenderer>();
 
         string[] paths = new string[]
      {
@@ -56,7 +59,6 @@ public class Player : Entity
         audioSourceWalk = gameObject.AddComponent<AudioSource>();
         audioSourceWalk.clip = walkSound;
 
-
         silenceSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/silence.ogg"); 
         audioSourceSilence = gameObject.AddComponent<AudioSource>(); 
         audioSourceSilence.clip = silenceSound;
@@ -65,6 +67,11 @@ public class Player : Entity
 
         audioSource = gameObject.AddComponent<AudioSource>();
         eatSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/eating.ogg");
+
+        audioSourceWalk.volume = MusicManager.instance.GetGameVolume();
+        audioSourceSilence.volume = MusicManager.instance.GetGameVolume();
+        audioSourceHurt.volume = MusicManager.instance.GetGameVolume();
+        audioSource.volume = MusicManager.instance.GetGameVolume();
     }
 
     void Update()
@@ -119,6 +126,14 @@ public class Player : Entity
     {
         base.TakeDamage(amount);
         audioSourceHurt.PlayOneShot(damageSounds[Random.Range(0, damageSounds.Length)]);
+        StartCoroutine(onDamageReaction());
+        
+    }
+    IEnumerator onDamageReaction()
+    {
+        render.material.color = Color.HSVToRGB(0, 0.5f, 1);
+        yield return new WaitForSeconds(0.1f);
+        render.material.color = Color.white; 
     }
 
     

@@ -16,7 +16,7 @@ public class Sword : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         swordAttackSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/sword_attack.wav"); // Добавлено
         audioSource.clip = swordAttackSound;
-        audioSource.volume = 0.6f;
+        audioSource.volume = (MusicManager.instance.GetGameVolume()/1.6f);
     }
 
     void Update()

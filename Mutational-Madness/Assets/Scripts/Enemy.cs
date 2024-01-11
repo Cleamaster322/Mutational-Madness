@@ -24,10 +24,11 @@ public class Enemy : Entity
     private AudioSource audioSourceDeath;
     private Rigidbody2D rb2d;
     private CapsuleCollider2D cc2d;
+    private SpriteRenderer render;
 
     void Start()
     {
-
+        render = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>(); 
         cc2d = GetComponent<CapsuleCollider2D>();
         audioSourceHurt = gameObject.AddComponent<AudioSource>(); 
@@ -43,8 +44,8 @@ public class Enemy : Entity
          AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/mob_death2.wav")
         };
 
-        audioSourceHurt.volume = 0.2f;
-        audioSourceDeath.volume = 0.2f;
+        audioSourceHurt.volume = (MusicManager.instance.GetGameVolume())/3;
+        audioSourceDeath.volume = (MusicManager.instance.GetGameVolume())/3; 
     }
 
     private void Update()
@@ -64,6 +65,7 @@ public class Enemy : Entity
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
+        StartCoroutine(onDamageReaction());
         if (health > 0)
         {
             audioSourceHurt.PlayOneShot(mobHurtSounds[Random.Range(0, mobHurtSounds.Length)]); 
@@ -79,6 +81,12 @@ public class Enemy : Entity
         yield return new WaitWhile(() => audioSourceDeath.isPlaying);
         gameObject.SetActive(false);
         Instantiate(meat, enemy.position, enemy.rotation);
+    }
+    IEnumerator onDamageReaction()
+    {
+        render.material.color = Color.HSVToRGB(0, 0.5f, 1);
+        yield return new WaitForSeconds(0.1f);
+        render.material.color = Color.white;
     }
 
 
