@@ -6,7 +6,7 @@ public class Sword : MonoBehaviour
     //class for sword to work properly. Animating, damaging and sounding.
     public float attackRange = 2f;
     public LayerMask enemyLayer;
-    public float lastDirection = 1f; // 1 for right, -1 for left
+    public float lastDirection = 1f;
     public int damage;
     public Player player;
     public AudioClip swordAttackSound; 
@@ -15,7 +15,7 @@ public class Sword : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
-        swordAttackSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/sword_attack.wav"); // Добавлено
+        swordAttackSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/gamesound/sword_attack.wav"); 
         audioSource.clip = swordAttackSound;
         audioSource.volume = (MusicManager.instance.GetGameVolume()/1.6f);
     }
@@ -33,8 +33,8 @@ public class Sword : MonoBehaviour
             }
         }
 
-            // Update lastDirection based on player's movement
-            float horizontalInput = Input.GetAxis("Horizontal");
+     
+        float horizontalInput = Input.GetAxis("Horizontal");
         if (Mathf.Abs(horizontalInput) > 0.1f)
         {
             lastDirection = Mathf.Sign(horizontalInput);
