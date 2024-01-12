@@ -42,7 +42,7 @@ public class Winningsettings : MonoBehaviour
             CongratulationsOnLosing(player);
             flag++;
         }
-        else if (flag == 0 & player.flesh >= 2)
+        else if (flag == 0 & player.flesh >= 12)
         {
             CongratulationsOnWinning(player);
             flag++;
