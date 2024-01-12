@@ -97,7 +97,7 @@ public class Manager : MonoBehaviour
         int heartDifference = health - hearts.Count;
         if (health <= 0)
         {
-            SceneManager.LoadScene("PlayMenu");
+            
         }
         else if (heartDifference < 0)
         {
